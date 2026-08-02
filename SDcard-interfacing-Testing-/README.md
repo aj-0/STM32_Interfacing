@@ -7,24 +7,6 @@ This project demonstrates how to interface a **MicroSD Card** with an **STM32F40
 
 ---
 
-# 🏗️ Architecture
-
-```text
-                 +----------------------+
-                 | STM32F407 Discovery  |
-                 +----------+-----------+
-                            |
-                     SPI2 Interface
-               (SCK, MISO, MOSI, CS)
-                            |
-                     MicroSD Card Module
-                            |
-                 FATFS File System Layer
-                            |
-            File Read / Write / Storage
-```
-
----
 
 # 🛠️ Hardware & Software Tools
 
@@ -92,24 +74,5 @@ This project demonstrates how to interface a **MicroSD Card** with an **STM32F40
 ---
 
 
-# 📂 Project Structure
+<img width="1600" height="823" alt="image" src="https://github.com/user-attachments/assets/ddad51c5-5cc0-4ee3-ae12-5f6c8200b241" />
 
-```text
-SDCard_Interfacing_Testing/
-│
-├── Core/
-│   ├── Inc/
-│   └── Src/
-│
-├── Drivers/
-│
-├── FATFS/
-│
-├── Middlewares/
-│
-├── Debug/
-│
-├── SDCard_Interfacing_Testing.ioc
-│
-└── README.md
-```
