@@ -1,5 +1,5 @@
 # 🌐 STM32 W5500 Ethernet Interface – Ping Test 
-<img width="1600" height="610" alt="image" src="https://github.com/user-attachments/assets/324180c3-0ac0-4448-825b-2a06642ea189" />
+<img width="601" height="280" alt="630212708-324180c3-0ac0-4448-825b-2a06642ea189" src="https://github.com/user-attachments/assets/a538bc55-2f39-4900-b84d-0d1f3a99ab69" />
 
 ## 📖 Short Description
 
