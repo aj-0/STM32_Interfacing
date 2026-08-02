@@ -1,4 +1,4 @@
-# 🌐 **STM32 W5500 Ethernet Interface – Ping Test over SPI**
+# 🌐 **STM32 W5500 Ethernet Interface – Ping Test **
 <img width="1600" height="610" alt="image" src="https://github.com/user-attachments/assets/324180c3-0ac0-4448-825b-2a06642ea189" />
 
 ## 📖 Short Description
