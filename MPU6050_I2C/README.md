@@ -1,5 +1,5 @@
 # 📡 **MPU6050 Sensor Interfacing using I2C with STM32F407**
-<img width="1280" height="2844" alt="image" src="https://github.com/user-attachments/assets/5d69d253-19e1-4bbc-acf5-f22d88271d0c" />
+<img width="2844" height="1280" alt="630213071-5d69d253-19e1-4bbc-acf5-f22d88271d0c" src="https://github.com/user-attachments/assets/07d0a7e3-f35d-4604-ae80-6dfdc40541c9" />
 
 ## 📖 Short Description
 
