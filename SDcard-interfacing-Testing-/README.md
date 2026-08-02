@@ -31,13 +31,8 @@ This project demonstrates how to interface a **MicroSD Card** with an **STM32F40
 
 # ⚙️ STM32CubeMX Configuration
 
-## 🕒 Clock Configuration
-
-* ✅ HSE/HSI System Clock
-* ✅ SPI2 Peripheral Clock Enabled
 
 ## 🔩 Peripheral Configuration
-
 ### 💾 SPI2
 
 * Master Mode
