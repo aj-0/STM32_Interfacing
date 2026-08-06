@@ -36,19 +36,16 @@ This project demonstrates a **Fingerprint Enrollment and Authentication System**
 
 # 🐞 Debugging & Problems Solved
 
-## ❌ Problem
-
+## Problem
 Fingerprint sensor was not responding correctly to UART commands.
 
 ## 🔍 Root Cause
-
 - Incorrect command packet format.
 - **Wrong packet checksum**.
 - Timeout while waiting for sensor response.
 - Incorrect packet length.
 
 ## 🛠️ Debugging Steps
-
 - ✔️ Verified UART TX/RX connections.
 - ✔️ Checked baud rate configuration.
 - ✔️ Validated command packet structure.
@@ -59,11 +56,9 @@ Fingerprint sensor was not responding correctly to UART commands.
 - ✔️ Checked HAL UART return status.
 
 ## ✅ Solution
-
 Corrected the UART packet structure, checksum calculation, and command sequence. Successfully enrolled fingerprints, stored templates in the sensor's flash memory, and authenticated fingerprints using the search command with LED indication.
 
 ## 🎯 Skills Demonstrated
-
 - UART Communication
 - Binary Packet Construction
 - Fingerprint Sensor Integration
@@ -73,7 +68,6 @@ Corrected the UART packet structure, checksum calculation, and command sequence.
 ---
 
 # 📚 Concepts Covered
-
 - 👆 **Fingerprint Enrollment Process** – Capturing the same finger twice, generating two character files, and combining them into a fingerprint template.
 - 💾 **Template Storage** – Storing fingerprint templates in the R307S internal flash library with a unique template ID.
 - 🔍 **Fingerprint Authentication** – Searching the sensor's database to compare a live fingerprint against previously enrolled templates.
@@ -82,27 +76,4 @@ Corrected the UART packet structure, checksum calculation, and command sequence.
 - ⚙️ **Sensor Command Sequence** – Executing the complete workflow: Handshake → Capture Image → Generate Character File → Merge Template → Store Template → Search Template.
 
 ---
-
-# 📂 Project Structure
-
-```text
-Fingerprint_Enrollment_Authentication_R307S/
-│
-├── Core/
-│   ├── Inc/
-│   └── Src/
-│
-├── Drivers/
-│
-├── Debug/
-│
-├── R307S/
-│   ├── r307.c
-│   ├── r307.h
-│   └── protocol.c
-│
-├── Fingerprint_Enrollment_Authentication_R307S.ioc
-│
-└── README.md
-```
 <img width="1600" height="999" alt="image" src="https://github.com/user-attachments/assets/abe4a501-36b2-4586-b798-f3770baff0e4" />
