@@ -1,0 +1,15 @@
+../Drivers/CMSIS/Include/core_cm4.h:2064:26:ITM_SendChar	16	static,ignoring_inline_asm
+../Core/Src/main.c:60:6:Tx	16	static
+../Core/Src/main.c:64:5:__io_putchar	16	static
+../Core/Src/main.c:66:6:handshake_cmd	48	static
+../Core/Src/main.c:96:6:fp_capture	48	static
+../Core/Src/main.c:130:6:imgtocharbuff1	56	static
+../Core/Src/main.c:159:6:imgtocharbuff2	56	static
+../Core/Src/main.c:184:6:template_generation	48	static
+../Core/Src/main.c:211:6:template_store	56	static
+../Core/Src/main.c:240:6:search	80	static
+../Core/Src/main.c:282:5:main	8	static
+../Core/Src/main.c:438:6:SystemClock_Config	88	static
+../Core/Src/main.c:484:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:517:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:553:6:Error_Handler	4	static,ignoring_inline_asm
