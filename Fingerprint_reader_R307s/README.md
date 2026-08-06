@@ -1,4 +1,5 @@
 # 👆 Fingerprint Enrollment & Authentication using R307S (STM32F407)
+<img width="1280" height="582" alt="image" src="https://github.com/user-attachments/assets/240f431b-070c-4c79-b2e3-e3a5da34b962" />
 
 ## 📖 Short Description
 
