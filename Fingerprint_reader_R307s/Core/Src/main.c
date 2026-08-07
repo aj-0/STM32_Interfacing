@@ -188,7 +188,7 @@ void template_generation (void){
       0xFF,0xFF,0xFF,0xFF, //addr
       0x01, // pid
       0x00,0x03, //len
-      0x05, // cmd & buffer id
+      0x05, // cmd 
       0x00,0x09 //cheksum
   };
 		uint8_t rx[20];
