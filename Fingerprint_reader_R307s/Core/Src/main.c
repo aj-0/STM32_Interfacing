@@ -188,7 +188,7 @@ void template_generation (void){
       0xFF,0xFF,0xFF,0xFF, //addr
       0x01, // pid
       0x00,0x03, //len
-      0x05, // cmd 
+      0x05, // cmd
       0x00,0x09 //cheksum
   };
 		uint8_t rx[20];
@@ -208,14 +208,14 @@ void template_generation (void){
     }
 }
 
-void template_store(void){
+void template_store(uint8_t bufid){
 	 uint8_t id []=
  {
      0xEF,0x01, //header
      0xFF,0xFF,0xFF,0xFF, //addr
      0x01, // pid
      0x00,0x06, //len
-     0x06,0x01, // cmd & buffer id
+     0x06,bufid, // cmd & buffer id
 	  0x00,0x01,  // mem loc id (2 bytes)
      0x00,0x0F //cheksum
  };
@@ -264,15 +264,26 @@ uint8_t rx[40];
 
 
 
-	         if (rx[9]== 0x00){
-printf("MATCHEDDDDDDDDDDDDDD\n");
-HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);}
-	         else{
+	         if (rx[9]== 0x00)
+			 {
+                  printf("MATCHEDDDDDDDDDDDDDD\n");
+                HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
+	         }
 
+	         else
 	        	 printf("\nnotttttttttttttttttttttt\n");
-	        	 HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);}
+
  }
+
 }
+
+volatile int c=0;
+
+ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	 if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) == GPIO_PIN_RESET)
+		 c =1;
+ }
+
 /* USER CODE END 0 */
 
 /**
@@ -309,15 +320,22 @@ int main(void)
   printf("printf works\n ");
 
 
+
+
   handshake_cmd();
-  fp_capture();
-  imgtocharbuff1();
-  HAL_Delay(100);
-  fp_capture( );
-  imgtocharbuff2();
-  HAL_Delay(100);
-  template_generation();
-  template_store();
+
+
+//
+//  fp_capture();
+//  imgtocharbuff1();
+//  HAL_Delay(100);
+//  fp_capture( );
+//  imgtocharbuff2();
+//  HAL_Delay(100);
+//  template_generation();
+//  template_store(0x01);
+
+
 
 
 //  uint8_t getImage2_cmd[] =
@@ -368,9 +386,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+if(c){
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, RESET);
 
-//search
+	  printf("search\n");
+	  fp_capture( );
+	  imgtocharbuff1();
+	  search();
+	  HAL_Delay(1000);
+	  c=0;
 
+}
 
 //	  uint8_t getImage3_cmd[] =
 //	   {
@@ -396,12 +422,7 @@ int main(void)
 //	       printf("\r\n");
 //	   }
 //	   printf("remove   Finger\r\n");
-	  printf("search\n");
-	  HAL_Delay(2000);
-	  fp_capture( );
-	  imgtocharbuff1();
-	  search();
-	  HAL_Delay(2000);
+
 
 	 // generating data from img
 //	   uint8_t genchar3[] =
@@ -530,12 +551,22 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin : PA1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : PD12 PD13 */
   GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 
