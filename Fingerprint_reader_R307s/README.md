@@ -1,4 +1,4 @@
-# 👆 Fingerprint Enrollment & Authentication using R307S (STM32F407)
+# 👆 Fingerprint Enrollment & Authentication using R307S ( Interrupt / Touch Pin)
 <img width="1280" height="582" alt="image" src="https://github.com/user-attachments/assets/240f431b-070c-4c79-b2e3-e3a5da34b962" />
 
 ## 📖 Short Description
@@ -31,6 +31,8 @@ This project demonstrates a **Fingerprint Enrollment and Authentication System**
 |------|----------|
 | PA2 | USART2_TX |
 | PA3 | USART2_RX |
+
+PA1  / Any gpio pin - Interrupt with PULL UP & Falling edge detection
 
 ---
 
