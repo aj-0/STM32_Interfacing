@@ -145,6 +145,7 @@ void imgtocharbuff1(void)
   if(ret==HAL_OK)
     {
         printf("imgtocharbuff1 : ");
+
         for(int i=0;i<12;i++)
             printf("%02X ",rx[i]);
 
@@ -172,9 +173,11 @@ void imgtocharbuff2(void)
   if(ret==HAL_OK)
     {
         printf("imgtocharbuff2 RX : ");
+
         for(int i=0;i<12;i++)
             printf("%02X ",rx[i]);
-            printf("\r\n");
+
+        printf("\r\n");
     }
   HAL_Delay(50);
  }
@@ -197,14 +200,15 @@ void template_generation (void){
         printf("Merge RX : ");
 
         for(int i=0;i<12;i++)
-        printf("%02X ",rx[i]);
+            printf("%02X ",rx[i]);
+
         printf("\r\n");
         printf("stored\r\n");
 
     }
 }
 
-void template_store(uint8_t bufid){
+void template_store(uint8_t bufid ,int8_t chk ,int8_t ids){
 	 uint8_t id []=
  {
      0xEF,0x01, //header
@@ -212,8 +216,8 @@ void template_store(uint8_t bufid){
      0x01, // pid
      0x00,0x06, //len
      0x06,bufid, // cmd & buffer id
-	  0x00,0x01,  // mem loc id (2 bytes)
-     0x00,0x0F //cheksum
+	  0x00,ids,  // mem loc id (2 bytes)
+     0x00,chk   //cheksum
  };
  uint8_t rx[20];
 
@@ -233,37 +237,43 @@ void template_store(uint8_t bufid){
 }
 
 
-void search(void)
-{
-   uint8_t user []=
+void search(void){
+
+
+uint8_t user []=
 	   {
 	       0xEF,0x01, //header
 	       0xFF,0xFF,0xFF,0xFF, //addr
 	       0x01, // pid
-	       0x00,0x08,//len
+	       0x00,0x08,
+		   //len
 	       0x04,0x01, // cmd & buffer id
 	 	  0x00,0x01,  // st pge(2 bytes)
-	 	  0x00,0x01,  // pge num (2 bytes)
-	       0x00,0x10 //cheksum
+	 	  0x00,0x02,  // pge num (2 bytes)
+	       0x00,0x11 //cheksum
 	   };
 uint8_t rx[40];
 	   Tx(user, sizeof(user));
 	   ret = HAL_UART_Receive(&huart2, rx, 16, 1000);
 	   if(ret==HAL_OK)
-   {
+	     {
 	         printf("last RX : ");
+
 	         for(int i=0;i<16;i++)
 	             printf("%02X ",rx[i]);
 
-	   if (rx[9]== 0x00)
-			 {
-                printf("FINGERPRINT MATCHEDDDDDDDDDDDDDD\n");
-                HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
+
+
+	         if (rx[9]== 0x00){
+                  printf("MATCHEDDDDDDDDDDDDDD\n");
+HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
 	         }
 
-	   else
-	         printf("\nNOT MATCHED\n");
-   }
+	         else
+	        	 printf("\nnotttttttttttttttttttttt\n");
+
+ }
+
 }
 
 volatile int c=0;
@@ -311,15 +321,65 @@ int main(void)
 
 
 
-handshake_cmd();
- fp_capture();
- imgtocharbuff1();
- HAL_Delay(100);
- fp_capture( );
- imgtocharbuff2();
- HAL_Delay(100);
- template_generation();
- template_store(0x01);
+  handshake_cmd();
+
+
+
+  fp_capture();
+  imgtocharbuff1();
+  HAL_Delay(100);
+  fp_capture( );
+  imgtocharbuff2();
+  HAL_Delay(100);
+  template_generation();
+  template_store(0x01 ,0x0F ,0x01);
+
+
+HAL_Delay(2000);
+  fp_capture();
+    imgtocharbuff1();
+    HAL_Delay(100);
+    fp_capture( );
+    imgtocharbuff2();
+    HAL_Delay(100);
+    template_generation();
+    template_store(0x01, 0x10, 0x02);
+
+    //  uint8_t getImage2_cmd[] =
+//  {
+//      0xEF,0x01,
+//      0xFF,0xFF,0xFF,0xFF,
+//      0x01,
+//      0x00,0x03,
+//      0x01,
+//      0x00,0x05
+//  };
+//  uint8_t rx[20];
+//
+//  Tx(getImage2_cmd, sizeof(getImage2_cmd));
+//
+//  ret = HAL_UART_Receive(&huart2, rx, 12, 1000);
+//
+//  if(ret==HAL_OK)
+//  {
+//      printf("RX : ");
+//
+//      for(int i=0;i<12;i++)
+//          printf("%02X ",rx[i]);
+//
+//      printf("\r\n");
+//  }
+//  printf("remove   Finger\r\n");
+//  HAL_Delay(3000);
+
+// generating data from img
+
+
+//// storing
+
+//// id
+
+
 
 
 
@@ -333,14 +393,14 @@ handshake_cmd();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-if(c){
+if(1){
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, RESET);
 
 	  printf("search\n");
 	  fp_capture( );
 	  imgtocharbuff1();
 	  search();
-	  HAL_Delay(1000);
+	  HAL_Delay(2000);
 	  c=0;
 
 }
