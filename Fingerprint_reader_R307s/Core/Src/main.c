@@ -145,7 +145,6 @@ void imgtocharbuff1(void)
   if(ret==HAL_OK)
     {
         printf("imgtocharbuff1 : ");
-
         for(int i=0;i<12;i++)
             printf("%02X ",rx[i]);
 
@@ -173,11 +172,9 @@ void imgtocharbuff2(void)
   if(ret==HAL_OK)
     {
         printf("imgtocharbuff2 RX : ");
-
         for(int i=0;i<12;i++)
             printf("%02X ",rx[i]);
-
-        printf("\r\n");
+            printf("\r\n");
     }
   HAL_Delay(50);
  }
@@ -200,8 +197,7 @@ void template_generation (void){
         printf("Merge RX : ");
 
         for(int i=0;i<12;i++)
-            printf("%02X ",rx[i]);
-
+        printf("%02X ",rx[i]);
         printf("\r\n");
         printf("stored\r\n");
 
@@ -239,8 +235,6 @@ void template_store(uint8_t bufid){
 
 void search(void)
 {
-
-
    uint8_t user []=
 	   {
 	       0xEF,0x01, //header
@@ -258,19 +252,17 @@ uint8_t rx[40];
 	   if(ret==HAL_OK)
    {
 	         printf("last RX : ");
-
 	         for(int i=0;i<16;i++)
 	             printf("%02X ",rx[i]);
 
 	   if (rx[9]== 0x00)
 			 {
-                  printf("FINGERPRINT MATCHEDDDDDDDDDDDDDD\n");
+                printf("FINGERPRINT MATCHEDDDDDDDDDDDDDD\n");
                 HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, SET);
 	         }
 
-	         else
-	        	 printf("\nNOT MATCHED\n");
-
+	   else
+	         printf("\nNOT MATCHED\n");
    }
 }
 
