@@ -324,24 +324,20 @@ int main(void)
   handshake_cmd();
 
 
-
+// #1
   fp_capture();
   imgtocharbuff1();
-  HAL_Delay(100);
   fp_capture( );
   imgtocharbuff2();
-  HAL_Delay(100);
   template_generation();
   template_store(0x01 ,0x0F ,0x01);
-
-
+	
+//  #2
 HAL_Delay(2000);
   fp_capture();
     imgtocharbuff1();
-    HAL_Delay(100);
     fp_capture( );
     imgtocharbuff2();
-    HAL_Delay(100);
     template_generation();
     template_store(0x01, 0x10, 0x02);
 
